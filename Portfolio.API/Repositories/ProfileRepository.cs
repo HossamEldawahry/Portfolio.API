@@ -30,9 +30,6 @@ namespace Portfolio.API.Repositories
             };
             await _context.Profiles.AddAsync(profile).ConfigureAwait(false);
         }
-
-        public void Delete(Profile data) =>
-            _context.Profiles.Remove(data);
         public async Task<Profile?> GetByIdAsync(int id) =>
             await _context.Profiles.FindAsync(id).ConfigureAwait(false);
         public async Task<Profile?> GetFirstAsync() => 
