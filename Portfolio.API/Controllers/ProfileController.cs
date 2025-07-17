@@ -47,7 +47,7 @@ namespace Portfolio.API.Controllers
             {
                 return NotFound($"Profile With ID --- {id} --- Not Exist Or Not Finish Yet.");
             }
-            await _unit.Projects.UpdateAsync(id, profile).ConfigureAwait(true);
+            await _unit.Profiles.UpdateAsync(id, profile).ConfigureAwait(true);
             await _unit.CompleteAsync().ConfigureAwait(true);
             return Ok();
         }
