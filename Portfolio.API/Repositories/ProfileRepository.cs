@@ -70,7 +70,7 @@ namespace Portfolio.API.Repositories
             if (imageFile == null || imageFile.Length == 0)
                 return null;
 
-            string folderPath = Path.Combine(_env.WebRootPath, "Images", "projects");
+            string folderPath = Path.Combine(_env.WebRootPath, "Images");
 
             if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);
@@ -83,7 +83,7 @@ namespace Portfolio.API.Repositories
                 await imageFile.CopyToAsync(stream).ConfigureAwait(false);
             }
 
-            return $"/Images/projects/{fileName}";
+            return $"/Images/{fileName}";
         }
 
     }
