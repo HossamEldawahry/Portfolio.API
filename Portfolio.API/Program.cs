@@ -19,7 +19,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyCorsPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:4200") // Angular dev server
+        policy.WithOrigins("https://portfolio-front-end-virid.vercel.app") // Angular dev server
               .AllowAnyHeader()
               .AllowAnyMethod();
     });

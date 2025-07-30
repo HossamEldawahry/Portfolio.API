@@ -1,4 +1,6 @@
 ﻿
+using Portfolio.API.Models;
+
 namespace Portfolio.API.Controllers
 {
     [Route("api/[controller]")]
@@ -77,6 +79,23 @@ namespace Portfolio.API.Controllers
             _unit.Projects.Delete(project);
             await _unit.CompleteAsync().ConfigureAwait(true);
             return NoContent();
+        }
+        [HttpGet("paged")]
+        public async Task<IActionResult> GetPaged([FromQuery] int page = 1, [FromQuery] int pageSize = 5)
+        {
+            if (page <= 0 || pageSize <= 0)
+                return BadRequest("page and pageSize must be greater than 0");
+
+            var projects = await _unit.Projects.GetAllAsync(page,pageSize).ConfigureAwait(true);
+            var totalCount = await _unit.Projects.CountAsync().ConfigureAwait(true);
+            var result = new ResultPagesDto<Project>
+            {
+                Items = projects,
+                TotalCount = totalCount,
+                Page = page,
+                PageSize = pageSize
+            };
+            return Ok(result);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Portfolio.API.Repositories
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
+namespace Portfolio.API.Repositories
 {
     public class ProjectRepository : IProjectRepository
     {
@@ -90,7 +92,7 @@
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync()
-                .ConfigureAwait(true);
+                .ConfigureAwait(false);
         public async Task<Project?> GetByIdAsync(int id) => 
             await _context.Projects
                 .SingleOrDefaultAsync(p => p.Id == id)
