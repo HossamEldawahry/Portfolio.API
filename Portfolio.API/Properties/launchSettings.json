@@ -24,7 +24,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7003;http://localhost:5255",
+      "applicationUrl": "https://localhost:7003;http://localhost:5255;https://hossamportfolioapi.runasp.net/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
