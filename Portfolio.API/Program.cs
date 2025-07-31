@@ -42,6 +42,7 @@ app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 app.UseCors("MyCorsPolicy");
+app.UseCors("localPolicy");
 app.UseAuthorization();
 app.MapControllers();
 app.MapGet("/", context =>
