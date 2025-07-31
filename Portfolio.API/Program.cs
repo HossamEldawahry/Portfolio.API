@@ -19,13 +19,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyCorsPolicy", policy =>
     {
-        policy.WithOrigins("https://portfolio-front-end-virid.vercel.app") // Angular dev server
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
-    options.AddPolicy("localPolicy", policy =>
-    {
-        policy.WithOrigins("http://localhost:4200/") // Angular dev server
+        policy.WithOrigins("https://portfolio-front-end-virid.vercel.app",
+            "http://localhost:4200") // Angular dev server
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -42,7 +37,6 @@ app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 app.UseCors("MyCorsPolicy");
-app.UseCors("localPolicy");
 app.UseAuthorization();
 app.MapControllers();
 app.MapGet("/", context =>
