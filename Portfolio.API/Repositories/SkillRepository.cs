@@ -12,9 +12,17 @@ namespace Portfolio.API.Repositories
         public async Task AddAsync(Skill data) => await _context.Skills.AddAsync(data).ConfigureAwait(false);
         public async Task<int> CountAsync() => await _context.Skills.CountAsync().ConfigureAwait(false);
         public void Delete(Skill data) => _context.Skills.Remove(data);
-        public async Task<IEnumerable<Skill>> GetAllAsync() => await _context.Skills.ToListAsync().ConfigureAwait(false);
-        public async Task<IEnumerable<Skill>> GetAllAsync(int page, int pageSize) => 
-             await _context.Skills
+        public async Task<IEnumerable<Skill>> GetAllAsync() =>
+            await _context.Skills
+                .OrderBy(s => s.Name)
+                .ThenBy(s => s.Id)
+                .ToListAsync()
+                .ConfigureAwait(false);
+
+        public async Task<IEnumerable<Skill>> GetAllAsync(int page, int pageSize) =>
+            await _context.Skills
+                .OrderBy(s => s.Name)
+                .ThenBy(s => s.Id)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync()

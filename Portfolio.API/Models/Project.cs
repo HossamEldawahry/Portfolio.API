@@ -10,6 +10,7 @@
         public string? ImageUrl { get; set; }
         public string? GitHubUrl { get; set; }
         public string? DemoUrl { get; set; }
+        public bool IsFeatured { get; set; }
 
     }
 }

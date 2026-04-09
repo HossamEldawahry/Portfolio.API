@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
-namespace Portfolio.API.Repositories
+﻿namespace Portfolio.API.Repositories
 {
     public class ProjectRepository : IProjectRepository
     {
@@ -45,7 +43,8 @@ namespace Portfolio.API.Repositories
                 Description = dto.Description,
                 GitHubUrl = dto.GitHubUrl,
                 DemoUrl = dto.DemoUrl,
-                ImageUrl = imagePath
+                ImageUrl = imagePath,
+                IsFeatured = dto.IsFeatured
             };
 
             await _context.Projects.AddAsync(project).ConfigureAwait(false);
@@ -81,14 +80,21 @@ namespace Portfolio.API.Repositories
             project.Description = dto.Description;
             project.GitHubUrl = dto.GitHubUrl;
             project.DemoUrl = dto.DemoUrl;
+            project.IsFeatured = dto.IsFeatured;
 
             _context.Projects.Update(project);
 
         }
 
-        public async Task<IEnumerable<Project>> GetAllAsync() => await _context.Projects.ToListAsync().ConfigureAwait(true);
-        public async Task<IEnumerable<Project>> GetAllAsync(int page, int pageSize) => 
+        public async Task<IEnumerable<Project>> GetAllAsync() =>
             await _context.Projects
+                .OrderByDescending(p => p.Id)
+                .ToListAsync()
+                .ConfigureAwait(true);
+
+        public async Task<IEnumerable<Project>> GetAllAsync(int page, int pageSize) =>
+            await _context.Projects
+                .OrderByDescending(p => p.Id)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync()

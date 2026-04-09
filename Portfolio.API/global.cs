@@ -1,6 +1,8 @@
 ﻿global using Microsoft.EntityFrameworkCore;
 global using System.ComponentModel.DataAnnotations;
+global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.RateLimiting;
 
 global using Portfolio.API.Data;
 global using Portfolio.API.Models;
